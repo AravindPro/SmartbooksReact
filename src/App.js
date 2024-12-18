@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 
-// let URL = "https://smartbooks-sfgp.onrender.com";
+let URL = "https://smartbooks-sfgp.onrender.com";
 
-let URL = "http://127.0.0.1:8000";
+// let URL = "http://127.0.0.1:8000";
 let chapno = 0;
 let index = 0;
 let nxtchapno = null;
