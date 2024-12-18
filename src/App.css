@@ -1,0 +1,41 @@
+.main{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.MainBook{
+	width: 500px;
+	height: 650px;
+	border: 5px solid black;
+	border-radius: 86px;
+	background-color: #575757;
+	padding: 50px 30px;
+	margin: 10px;
+	text-align: justify;
+}
+.text{
+	background-color: inherit;
+	color: #E5E5E5;
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	height: inherit;
+	font-size: 0.9vw;
+	overflow-y: scroll;
+}
+.buttonsTray{
+	display: flex;
+	flex-direction: column;
+	justify-content:end;
+	margin-bottom: 10px;
+}
+.buttons{
+	height: 60px;
+	width: 60px;
+	margin: 5px 0;
+}
+.buttons:hover{
+	cursor: pointer;
+}
