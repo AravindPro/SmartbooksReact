@@ -5,7 +5,7 @@ import axios from 'axios';
 let URL = "https://smartbooks-sfgp.onrender.com";
 
 // let URL = "http://127.0.0.1:8000";
-let chapno = 0;
+let chapno = 1;
 let index = 0;
 let nxtchapno = null;
 let nxtind = null;
@@ -26,11 +26,12 @@ function App() {
     let [booklist, setBooklist] = useState([]);
     let [bookname, setBookname] = useState('');
     let [compressionratio, setCompressionratio] = useState(1.5);
+    let [wordlimit, setWordLimit] = useState(150);
 
     const getpiece = ()=>{
       // console.log("Here");
-      console.log(`${chapno} ${index}`);
-      axios.post(`${URL}/nextpiece`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: 150 }})
+      console.log(`${wordlimit}`);
+      axios.post(`${URL}/nextpiece`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: wordlimit }})
         // &bookname=${bookname}&chapno=${chapno}&index=${index}&styletokens=${styletokens}`)
         .then((res)=>res.data)
         .then((data)=>{
@@ -43,7 +44,8 @@ function App() {
         .catch((e)=>console.log(e));
     }
     const refresh = ()=>{
-      axios.post(`${URL}/nextpiecegpt`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: 150, COMPRESSIONRATIO: compressionratio }})
+      console.log(`${chapno} ${index}`);
+      axios.post(`${URL}/nextpiecegpt`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: wordlimit, COMPRESSIONRATIO: compressionratio }})
         // &bookname=${bookname}&chapno=${chapno}&index=${index}&styletokens=${styletokens}`)
         .then((res)=>res.data)
         .then((data)=>{
@@ -59,6 +61,23 @@ function App() {
       index = nxtind;
       chapno = nxtchapno;
       return getpiece();
+    }
+
+    const prevPiece = ()=>{
+      axios.post(`${URL}/prevpiece`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: wordlimit }})
+        // &bookname=${bookname}&chapno=${chapno}&index=${index}&styletokens=${styletokens}`)
+        .then((res)=>res.data)
+        .then((data)=>{
+          if(!('error' in data)){
+            setText(data['text']);
+            nxtchapno = chapno;
+            nxtind = index;
+            chapno = data['chap'];
+            index = data['ind'];
+            console.log(`${nxtchapno} ${nxtind} ${chapno} ${index}`);
+          }
+        })
+        .catch((e)=>console.log(e));
     }
   // Load the first piece of text
   useEffect(()=>{
@@ -83,11 +102,20 @@ function App() {
     <div className="App">
       <div className="selectionDiv">
         <input type="text" name="compression" id="" value={compressionratio} onChange={(e)=>setCompressionratio(e.target.value)}/>
+        <input type="text" name="wordlimit" id="" value={wordlimit} onChange={(e)=>setWordLimit(e.target.value)}/>
         <select name="selection" className="selection" value={bookname} onChange={(i)=>{ console.log("Changed!");  chapno=0; index=0; setBookname(i.target.value);}}>
           {booklist.map((i) => <option value={i}>{i}</option>)};
         </select>
       </div>
       <div className="main">
+        <div className="buttonsTray">
+          <span className="buttons prevPage" onClick={prevPiece}>
+            <svg viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M78 62C78 70.8366 70.8366 78 62 78H16C7.16344 78 0 70.8366 0 62V16C0 7.16344 7.16344 0 16 0H62C70.8366 0 78 7.16344 78 16V62Z" fill="#949494"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M36.0762 59.5096C36.3061 59.2402 36.494 56.2654 36.494 52.8998V46.7808L50.7471 46.5828L65.0001 46.3849V39.3931V32.4013L50.7715 32.2033L36.5423 32.006L36.3618 25.6391C36.2541 21.8613 35.902 19.1639 35.4948 19.0057C34.5418 18.6355 13.0001 38.1588 13.0001 39.3931C13.0001 40.3226 34.2067 60.0005 35.2078 60.0005C35.4559 60.0005 35.8469 59.7797 36.0762 59.5096Z" fill="white"/>
+            </svg>
+          </span>
+        </div>
         <div className="MainBook">
           <div className="text">
             {text.split('\n').map((i)=><p>{i.trim()}</p>)}
