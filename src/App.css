@@ -2,11 +2,16 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	width: 100%;
+	height: auto;
 }
 
 .MainBook{
-	width: 500px;
-	height: 650px;
+	display: inline-block;
+	width: min(670px, 95%);
+	height: min(1300px, 80vh);
+	/* width: 500px;
+	height: 650px; */
 	border: 5px solid black;
 	border-radius: 86px;
 	background-color: #575757;
@@ -22,7 +27,7 @@
 	font-weight: 400;
 	font-style: normal;
 	height: inherit;
-	font-size: 0.9vw;
+	font-size: 93%;
 	overflow-y: scroll;
 }
 .buttonsTray{
