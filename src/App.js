@@ -3,9 +3,9 @@ import './App.css';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 
-// let URL = "https://smartbooks-sfgp.onrender.com";
+let URL = "https://smartbooks-sfgp.onrender.com";
 
-let URL = "http://127.0.0.1:8000";
+// let URL = "http://127.0.0.1:8000";
 let chapno = 1;
 let index = 0;
 let nxtchapno = null;
