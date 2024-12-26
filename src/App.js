@@ -60,7 +60,7 @@ Welcome to this **random** Markdown test! Below you'll find various sections dem
     }
     const refresh = ()=>{
       console.log(`${chapno} ${index}`);
-      axios.post(`${URL}/nextpiecegpt`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: wordlimit, COMPRESSIONRATIO: compressionratio, styletokens: "simple language and in the language of coldfusion youtuber" }})
+      axios.post(`${URL}/nextpiecegpt`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: wordlimit, COMPRESSIONRATIO: compressionratio, styletokens: "simple language" }})
         // &bookname=${bookname}&chapno=${chapno}&index=${index}&styletokens=${styletokens}`)
         .then((res)=>res.data)
         .then((data)=>{
