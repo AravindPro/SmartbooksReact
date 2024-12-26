@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
-let URL = "https://smartbooks-sfgp.onrender.com";
+// let URL = "https://smartbooks-sfgp.onrender.com";
 
-// let URL = "http://127.0.0.1:8000";
+let URL = "http://127.0.0.1:8000";
 let chapno = 1;
 let index = 0;
 let nxtchapno = null;
@@ -13,20 +14,31 @@ let nxtind = null;
 let first=true; //Used to run useEffect only once
 // let compressionratio = 4;
 function App() {
-    let [text, setText] = useState(`Lorem ipsum dolor sit amet. Et quia commodi id necessitatibus sint aut libero eligendi et quis expedita sed iure
-              delectus. At quaerat quia ut porro dolores aut rerum quidem sed repudiandae debitis in autem deserunt ad unde debitis.
-              Non harum accusamus qui voluptatibus reprehenderit a explicabo quia. Qui magni quod ut autem praesentium est illo
-              impedit sed dolor deleniti hic reprehenderit consequatur. Nam iure aspernatur et saepe pariatur eum molestiae quia non
-              consequuntur nisi sed voluptatum cumque!
-    
-              Non veritatis voluptatem est tempora omnis sit voluptatem fuga ea natus quae et aliquid internos et odio velit. Ea
-              maxime accusamus At magnam facere et minus soluta et harum accusamus hic vitae ipsam. Vel modi veritatis aut dolorem
-              accusamus cum voluptatum quos eum culpa galisum qui quaerat sint a molestiae quos.v`);
+    let [text, setText] = useState(`# Markdown Test
+
+## Introduction
+
+Welcome to this **random** Markdown test! Below you'll find various sections demonstrating Markdown formatting.
+
+### Bullet List
+
+- Item 1
+- Item 2
+- Item 3
+  - Subitem 1
+  - Subitem 2
+- Item 4
+
+### Numbered List
+
+1. First item
+2. Second item
+3. Third item`);
     
     let [booklist, setBooklist] = useState([]);
     let [bookname, setBookname] = useState('');
     let [compressionratio, setCompressionratio] = useState(1.5);
-    let [wordlimit, setWordLimit] = useState(150);
+    let [wordlimit, setWordLimit] = useState(700);
 
     const getpiece = ()=>{
       // console.log("Here");
@@ -36,7 +48,10 @@ function App() {
         .then((res)=>res.data)
         .then((data)=>{
           if(!('error' in data)){
-            setText(data['text']);
+            text = data['text'];
+            console.log(text)
+            text = text.replace(/\.\/images\/([^\/]+)\/([^ ]+\.[a-z]{3,4})/g, `${URL}/images/$1/$2`)
+            setText(text);
             nxtchapno = data['chap'];
             nxtind = data['ind'];
           }
@@ -45,7 +60,7 @@ function App() {
     }
     const refresh = ()=>{
       console.log(`${chapno} ${index}`);
-      axios.post(`${URL}/nextpiecegpt`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: wordlimit, COMPRESSIONRATIO: compressionratio }})
+      axios.post(`${URL}/nextpiecegpt`, null, {params: { bookname: bookname, chapno: chapno, index: index, WORDLIMIT: wordlimit, COMPRESSIONRATIO: compressionratio, styletokens: "simple language and in the language of coldfusion youtuber" }})
         // &bookname=${bookname}&chapno=${chapno}&index=${index}&styletokens=${styletokens}`)
         .then((res)=>res.data)
         .then((data)=>{
@@ -118,7 +133,7 @@ function App() {
         </div>
         <div className="MainBook">
           <div className="text">
-            {text.split('\n').map((i)=><p>{i.trim()}</p>)}
+            <ReactMarkdown>{text}</ReactMarkdown>
           </div>
         </div>
         <div className="buttonsTray">

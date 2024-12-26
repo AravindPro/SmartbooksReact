@@ -5,7 +5,11 @@
 	width: 100%;
 	height: auto;
 }
-
+.main img{
+	display: block;
+	margin: 2px auto;
+	max-width: 300px;
+}
 .MainBook{
 	display: inline-block;
 	width: min(670px, 95%);
