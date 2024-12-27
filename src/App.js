@@ -65,7 +65,10 @@ Welcome to this **random** Markdown test! Below you'll find various sections dem
         .then((res)=>res.data)
         .then((data)=>{
           if(!('error' in data)){
-            setText(data['text']);
+            text = data['text'];
+            console.log(text)
+            text = text.replace(/\.\/images\/([^\/]+)\/([^ ]+\.[a-z]{3,4})/g, `${URL}/images/$1/$2`)
+            setText(text);
             nxtchapno = data['chap'];
             nxtind = data['ind'];
           }
