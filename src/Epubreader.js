@@ -6,9 +6,9 @@ import { useSwipeable } from 'react-swipeable';
 import remarkGfm from 'remark-gfm';         // For tables and GitHub Flavored Markdown
 import rehypeKatex from 'rehype-katex';     // For LaTeX support
 import 'katex/dist/katex.min.css'; 
-// let URL = "https://smartbooks-sfgp.onrender.com";
+let URL = "https://smartbooks-sfgp.onrender.com";
 
-let URL = "http://127.0.0.1:8000";
+// let URL = "http://127.0.0.1:8000";
 let chapno = 1;
 let index = 0;
 let nxtchapno = null;

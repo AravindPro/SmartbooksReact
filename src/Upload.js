@@ -4,7 +4,9 @@ import axios from 'axios';
 
 const FileUploader = () => {
     const [selectedFile, setSelectedFile] = useState(null);
-	let URL = "http://127.0.0.1:8000";
+	// let URL = "http://127.0.0.1:8000";
+    let URL = "https://smartbooks-sfgp.onrender.com";
+
 
 	const navigate = useNavigate();  // Declare useNavigate at the top level
     // Function to handle file selection
