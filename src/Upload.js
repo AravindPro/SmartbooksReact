@@ -36,7 +36,7 @@ const FileUploader = () => {
 		})
 		.then((res)=>{
 			console.log("Uploaded successfully!");
-			navigate('/epub');
+			navigate('/');
 		})
 		.catch((error)=>console.log(error));
         // Example: Logging file information to the console

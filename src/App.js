@@ -12,8 +12,8 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-            <Route path="/epub" element={<Epubreader />} />
-            <Route path="/" element={<Upload />} />
+            <Route path="/" element={<Epubreader />} />
+            <Route path="/upload" element={<Upload />} />
         </Routes>
       </Router>
     </div>
