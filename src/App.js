@@ -4,18 +4,18 @@ import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import Epubreader from './Epubreader';
 import Upload from './Upload';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from "react-router-dom";
 
 function App() {
 
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Routes>
             <Route path="/" element={<Epubreader />} />
             <Route path="/upload" element={<Upload />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }
